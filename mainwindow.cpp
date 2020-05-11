@@ -17,9 +17,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     QSettings settings("Gurv", "SiegeRegionChanger");
     this->pathToFile = settings.value("pathToSettings").toString();
+    ui->pathLabel->setText("Settings Path:\n" + settings.value("pathToSettings").toString());
     setInitialSetting()->setChecked(true);
-    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::regionChangeButtonPressed);
-
+    connect(ui->changeRegionButton, &QPushButton::clicked, this, &MainWindow::regionChangeButtonPressed);
+    connect(ui->changePathButton, &QPushButton::clicked, this, &MainWindow::setPathToFile);
 }
 
 MainWindow::~MainWindow()
@@ -33,6 +34,7 @@ void MainWindow::setPathToFile()
     popUp = new Dialog;
     popUp->show();
     connect(popUp, &Dialog::closed, this, &MainWindow::show);
+
 }
 
 QRadioButton *MainWindow::setInitialSetting()
@@ -40,6 +42,7 @@ QRadioButton *MainWindow::setInitialSetting()
     QSettings settings(this->pathToFile, QSettings::IniFormat);
     settings.beginGroup("ONLINE");
     QString startingSetting = settings.value("DataCenterHint").toString();
+    settings.endGroup();
     if (startingSetting == "default"){
         return(this->ui->defaultButton);
     }
@@ -83,9 +86,9 @@ QRadioButton *MainWindow::setInitialSetting()
         return(this->ui->japanwestButton);
     }
     else {
-        return(this->ui->defaultButton);
+
     }
-    settings.endGroup();
+    return(this->ui->defaultButton);
 }
 
 bool MainWindow::checkForFirstTime()

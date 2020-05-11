@@ -19,8 +19,8 @@
      <rect>
       <x>40</x>
       <y>100</y>
-      <width>124</width>
-      <height>346</height>
+      <width>150</width>
+      <height>416</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -124,11 +124,11 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="changeRegionButton">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>240</y>
+      <x>430</x>
+      <y>330</y>
       <width>181</width>
       <height>41</height>
      </rect>
@@ -142,6 +142,46 @@
      <string>Change to region</string>
     </property>
    </widget>
+   <widget class="QLabel" name="pathLabel">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>100</y>
+      <width>421</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Settings Path: 
+</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignHCenter|Qt::AlignTop</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="changePathButton">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>230</y>
+      <width>181</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Change Path</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -149,7 +189,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>

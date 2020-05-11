@@ -2,9 +2,9 @@
 #define DIALOG_H
 #include <QFile>
 #include <QDialog>
-#include <QLineEdit>
 #include <QSettings>
 #include <QUrl>
+#include <QFileDialog>
 namespace Ui {
 class Dialog;
 }
@@ -16,13 +16,12 @@ class Dialog : public QDialog
 public:
     explicit Dialog(QWidget *parent = nullptr);
     ~Dialog();
-
+    void openFileDialog();
 private:
     Ui::Dialog *ui;
-    QString textInEdit;
+    QFileDialog fileDialog;
+
 public slots:
-    void setText(QString text);
-    void setPath();
 
 signals:
     void closed();
