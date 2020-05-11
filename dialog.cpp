@@ -1,14 +1,12 @@
 #include "dialog.h"
 #include "ui_dialog.h"
-#include <QDebug>
+
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
 {
     ui->setupUi(this);
-    connect(ui->lineEdit, &QLineEdit::textEdited, this, &Dialog::setText);
-    connect(ui->pushButton, &QPushButton::clicked, this, &Dialog::setPath);
-
+    connect(ui->selectFileButton, &QPushButton::clicked, this, &Dialog::openFileDialog);
 }
 
 Dialog::~Dialog()
@@ -17,24 +15,26 @@ Dialog::~Dialog()
     delete ui;
 }
 
-void Dialog::setText(QString text)
+void Dialog::openFileDialog()
 {
-    this->textInEdit = text;
+    QFileDialog fileDialog;
+    fileDialog.show();
+
+
 }
 
-void Dialog::setPath()
-{
-    QString path = this->textInEdit;
-    if (!QUrl::fromLocalFile(path).isLocalFile() || !path.contains("GameSettings.ini" , Qt::CaseInsensitive)){
-        ui->label->setText("Please enter a\nvalid path");
-    }
-    else {
-        QFile settingsFile(path);
-        settingsFile.copy("GameSetings-backup.ini");
-        QSettings settings("Gurv", "SiegeRegionChanger");
-        settings.setValue("pathToSettings", path);
-        settings.setValue("firstTime", false);
-        this->~Dialog();
 
+void Dialog::setPath(QString pathSelected)
+{
+    if (!(QUrl::fromLocalFile(pathSelected).isLocalFile()) || !(pathSelected.contains("GameSettings.ini"))){
+       ui->label->setText("Please select a valid file!");
     }
+    else{
+       QSettings settings("Gurv", "SiegeRegionChanger");
+       settings.setValue("firstTime", "false");
+       settings.setValue("pathToSettings", pathSelected);
+       this->~Dialog();
+    }
+
+
 }

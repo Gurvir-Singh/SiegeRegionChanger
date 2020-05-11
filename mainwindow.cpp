@@ -18,8 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
     QSettings settings("Gurv", "SiegeRegionChanger");
     this->pathToFile = settings.value("pathToSettings").toString();
     setInitialSetting()->setChecked(true);
-    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::regionChangeButtonPressed);
-
+    connect(ui->changeRegionButton, &QPushButton::clicked, this, &MainWindow::regionChangeButtonPressed);
+    connect(ui->changePathButton, &QPushButton::clicked, this, &MainWindow::setPathToFile);
 }
 
 MainWindow::~MainWindow()
@@ -33,6 +33,7 @@ void MainWindow::setPathToFile()
     popUp = new Dialog;
     popUp->show();
     connect(popUp, &Dialog::closed, this, &MainWindow::show);
+    ui->pathLabel->setText("Settings Path:" + this->pathToFile);
 }
 
 QRadioButton *MainWindow::setInitialSetting()
