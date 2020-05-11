@@ -8,6 +8,11 @@ Dialog::Dialog(QWidget *parent) :
 
     ui->setupUi(this);
     connect(ui->selectFileButton, &QPushButton::clicked, this, &Dialog::openFileDialog);
+    connect(ui->okButton, &QPushButton::clicked, this, &Dialog::okButtonClicked);
+    QSettings settings("Gurv", "SiegeRegionChanger");
+    if (settings.value("firstTime") == true || settings.value("firstTime").isNull()){
+        ui->okButton->hide();
+    }
 }
 
 Dialog::~Dialog()
@@ -29,6 +34,11 @@ void Dialog::openFileDialog()
        settings.setValue("pathToSettings", pathEntered);
        this->~Dialog();
     }
+}
+
+void Dialog::okButtonClicked()
+{
+    this->~Dialog();
 }
 
 

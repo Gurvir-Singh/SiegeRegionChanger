@@ -22,7 +22,7 @@ private:
     QFileDialog fileDialog;
 
 public slots:
-
+    void okButtonClicked();
 signals:
     void closed();
 };
