@@ -19,10 +19,9 @@ public:
     void openFileDialog();
 private:
     Ui::Dialog *ui;
-
+    QFileDialog fileDialog;
 
 public slots:
-    void setPath(QString pathSelected);
 
 signals:
     void closed();
